@@ -12,10 +12,7 @@ let day = days[date.getDay()];
 return `${day} ${hours}:${minutes}`;
 }
 
-
-
 function displayTemperature(response){
-    console.log(response.data);
 let temperatureElement = document.querySelector(`#temperature`);
 temperatureElement.innerHTML = Math.round(response.data.main.temp);
 let cityElement = document.querySelector(`#city`);
@@ -33,5 +30,4 @@ dateElement.innerHTML = formatDate(response.data.dt*1000);
 }
 let apiKey = `907fef83425ee6575ce345a2f87d8989`;
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
-console.log(apiUrl);
 axios.get(apiUrl).then(displayTemperature);
