@@ -11,6 +11,34 @@ let days = ["Sunday", "Monday" ,"Tuesday", "Wensday", "Thursday", "Friday","Satu
 let day = days[date.getDay()];
 return `${day} ${hours}:${minutes}`;
 }
+function displayForecast(){
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML = `<div class="row">`;
+    let days= ["Thu", "Fri", "Sat","Sun"];
+    days.forEach(function(day) {
+        forecastHTML = forecastHTML+
+        `
+        <div class="col-2">
+        <div class="weather-forecast-date">${day}</div>
+         <img 
+            src="http://openweathermap.org/img/wn/01n@2x.png"
+            alt=""
+            width="42"
+         />
+         <div class="weather-forecast-temperature">
+        <span class="weather-forecast-temperature-max">
+        18°
+        </span>
+        <span class="weather-forecast-temperature-min">  
+        12°
+        </span>  
+    </div>
+</div>
+`;
+    });
+    forecastHTML = forecastHTML+`</div>`;
+    forecastElement.innerHTML = forecastHTML;
+}
 
 function displayTemperature(response){
 celsiusTemperature = response.data.main.temp;
@@ -31,12 +59,15 @@ dateElement.innerHTML = formatDate(response.data.dt*1000);
 let iconElement = document.querySelector(`#icon`);
 iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 iconElement.setAttribute("alt", document.querySelector(`#description`));
+
 }
 
 function search(city){
 let apiKey = `907fef83425ee6575ce345a2f87d8989`;
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemperature);
+
+
 }
 
 
@@ -73,3 +104,4 @@ fahrenheitlink.addEventListener("click", displayFahrenheitTemperature);
 let celsiuslink = document.querySelector("#celsius-link");
 celsiuslink.addEventListener("click", displayCelsiusTemperature);
 search("Kyiv");
+displayForecast();
