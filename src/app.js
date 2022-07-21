@@ -37,7 +37,7 @@ function displayForecast(response){
             width="42"
          />
          <div class="weather-forecast-temperature">
-        <span class="weather-forecast-temperature-max">
+        <span class="weather-forecast-temperature-max" id="temperature-max">
         ${Math.round(forecastDay.temp.max)}°
         </span>
         <span class="weather-forecast-temperature-min">  
@@ -51,7 +51,6 @@ function displayForecast(response){
     forecastElement.innerHTML = forecastHTML;
 }
 function getForecast(coordinates){
-    console.log(coordinates);
     let apiKey = `907fef83425ee6575ce345a2f87d8989`;
     let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
     console.log(apiUrl);
